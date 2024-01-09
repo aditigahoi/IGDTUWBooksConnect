@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
          colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.teal,
-    // You can also specify other swatches like accentColor, etc.
   ),
         useMaterial3: true,
       ),
