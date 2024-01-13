@@ -1,3 +1,4 @@
+import 'package:books_connect/Screens/bookscreen.dart';
 import 'package:books_connect/Screens/sellingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:books_connect/Screens/BookForm.dart';
@@ -22,11 +23,12 @@ class _MyHomePageState extends State<MyHomePage> {
             const Size.fromHeight(100.0), // Adjust the height as needed
         // clipper: MyClipper(),
         child: AppBar(
-          title: const Text('IGDTUW BooksConnect',
-               style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-               ),
+          title: const Text(
+            'IGDTUW BooksConnect',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           centerTitle: true,
           backgroundColor: Color(0xFF8C1C13),
@@ -78,14 +80,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           CustomInkWell(
+                            CustomInkWell(
                               labelText: 'Computer Science',
-                              destinationScreen: SellBookForm(),
+                              destinationScreen: BookListScreen(),
                             ),
                             SizedBox(width: 10),
-                           CustomInkWell(
+                            CustomInkWell(
                               labelText: 'Information Technology',
-                              destinationScreen: SellBookForm(),
+                              destinationScreen: BookListScreen(),
                             )
                           ],
                         ),
@@ -94,14 +96,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                             CustomInkWell(
+                            CustomInkWell(
                               labelText: 'Electronics Communication',
-                              destinationScreen: SellBookForm(),
+                              destinationScreen: BookListScreen(),
                             ),
                             SizedBox(width: 10),
                             CustomInkWell(
                               labelText: 'Information Technology',
-                              destinationScreen: SellBookForm(),
+                              destinationScreen: BookListScreen(),
                             )
                           ],
                         )
@@ -110,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-             Card(
+              Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -134,12 +136,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           CustomInkWell(
+                            CustomInkWell(
                               labelText: 'Computer Science',
                               destinationScreen: SellBookForm(),
                             ),
                             SizedBox(width: 10),
-                           CustomInkWell(
+                            CustomInkWell(
                               labelText: 'Information Technology',
                               destinationScreen: SellBookForm(),
                             )
@@ -150,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                             CustomInkWell(
+                            CustomInkWell(
                               labelText: 'Electronics Communication',
                               destinationScreen: SellBookForm(),
                             ),
@@ -225,7 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-     bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
@@ -253,7 +255,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      );
+    );
   }
 }
 
