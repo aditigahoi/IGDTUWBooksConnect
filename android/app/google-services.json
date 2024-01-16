@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "928203689795",
+    "project_id": "booksconnect-834a5",
+    "storage_bucket": "booksconnect-834a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928203689795:android:5475f448461c0e133469f6",
+        "android_client_info": {
+          "package_name": "com.example.books_connect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArS8nQXxUp14qVZE9HPtTp2oUkzNZIvRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
