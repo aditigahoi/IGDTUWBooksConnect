@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:books_connect/Screens/BookForm.dart';
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.email});
+  final String email;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }

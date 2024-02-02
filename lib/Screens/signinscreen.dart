@@ -1,4 +1,6 @@
 import 'package:books_connect/Screens/HomeScreen.dart';
+// ignore: unused_import
+import 'package:books_connect/Screens/Page/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -187,7 +189,28 @@ class _SignupScreenState extends State<SignupScreen> {
                       print("Error ${error.toString()}");
                     });
                   }),
-
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Don't have account?",
+                          style:
+                              TextStyle(color: Color.fromARGB(179, 144, 4, 4))),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignUpScreen()));
+                        },
+                        child: const Text(
+                          " Sign Up",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 80, 11, 11),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
                   SizedBox(height: 20.0),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -227,7 +250,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
 Container firebaseUIButton(BuildContext context, String title, Function onTap) {
   return Container(
-    width: MediaQuery.of(context).size.width,
+    // width: MediaQuery.of(context).size.width,
     height: 50,
     margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),

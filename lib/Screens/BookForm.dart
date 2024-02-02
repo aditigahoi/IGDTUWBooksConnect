@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SellBookForm extends StatefulWidget {
@@ -7,7 +8,7 @@ class SellBookForm extends StatefulWidget {
 
 class _SellBookFormState extends State<SellBookForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
   // Define variables to store form data
   String _branch = '';
   String _subject = '';
@@ -23,7 +24,7 @@ class _SellBookFormState extends State<SellBookForm> {
       home: Center(
         child: Scaffold(
           appBar: AppBar(
-           backgroundColor:  Colors.teal,
+            backgroundColor: Colors.teal,
             title: const Text('Sell Your Book'),
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
@@ -36,7 +37,7 @@ class _SellBookFormState extends State<SellBookForm> {
               key: _formKey,
               child: Column(
                 children: [
-                 TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.book),
                       labelText: 'Branch',
@@ -157,21 +158,12 @@ class _SellBookFormState extends State<SellBookForm> {
                     style: ElevatedButton.styleFrom(
                       primary: Colors.teal, // Background color
                       onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      padding: EdgeInsets.all(16.0),
                     ),
-                    padding: EdgeInsets.all(16.0),
-                     ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save();
-                        // Process the form data (e.g., submit to a backend server)
-                        // You can add your logic here
-                        print('Title: $_year $_condition $_branch $_subject $_price');
-                        // Add further logic for submitting the form data
-                      }
-                    },
+                    onPressed: _saveFormDataToFirestore,
                     child: const Text('Sell Book'),
                   ),
                 ],
@@ -182,7 +174,31 @@ class _SellBookFormState extends State<SellBookForm> {
       ),
     );
   }
+
+  void _saveFormDataToFirestore() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      try {
+        await users.add({
+          'branch': _branch,
+          'subject': _subject,
+          'price': _price,
+          'year': _year,
+          'condition': _condition,
+        });
+        print("User Added");
+
+        // Clear the form fields
+        _formKey.currentState!.reset();
+
+        // Show a Snackbar to indicate success
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Book details added successfully')),
+        );
+      } catch (error) {
+        print("Failed to add user: $error");
+      }
+    }
+  }
 }
-
-
-
