@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignupScreen(), // Set the SignupScreen as the initial page
+      home: SigninScreen(), // Set the SignupScreen as the initial page
     );
   }
 }
