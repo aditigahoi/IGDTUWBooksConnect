@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+// Define _selectedBranch variable
+const List<String> _branches = ['CSE', 'ECE', 'IT', 'MAE'];
+
 class SellBookForm extends StatefulWidget {
   @override
   _SellBookFormState createState() => _SellBookFormState();
@@ -10,12 +13,13 @@ class _SellBookFormState extends State<SellBookForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   // Define variables to store form data
-  String _branch = '';
   String _subject = '';
   String _condition = '';
   double _year = 0.0;
   double _price = 0.0;
 
+  // Define _branches variable
+  String _selectedBranch = _branches.isNotEmpty ? _branches[0] : '';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,7 +41,7 @@ class _SellBookFormState extends State<SellBookForm> {
               key: _formKey,
               child: Column(
                 children: [
-                  TextFormField(
+                  DropdownButtonFormField<String>(
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.book),
                       labelText: 'Branch',
@@ -47,15 +51,25 @@ class _SellBookFormState extends State<SellBookForm> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
+                    value: _selectedBranch,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedBranch = newValue!;
+                      });
+                    },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter Branch';
+                        return 'Please select a branch';
                       }
                       return null;
                     },
-                    onSaved: (value) {
-                      _branch = value!;
-                    },
+                    items:
+                        _branches.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
                   const SizedBox(
                     height: 16,
@@ -181,7 +195,7 @@ class _SellBookFormState extends State<SellBookForm> {
 
       try {
         await users.add({
-          'branch': _branch,
+          'branch': _selectedBranch,
           'subject': _subject,
           'price': _price,
           'year': _year,

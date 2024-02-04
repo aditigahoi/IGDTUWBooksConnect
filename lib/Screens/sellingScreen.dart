@@ -18,17 +18,22 @@ class SellingScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildCategoryTile(context, 'Books', Icons.book_online, Colors.greenAccent, SellBookForm()),
-             _buildCategoryTile(context, 'Notes', Icons.note, Colors.greenAccent, sellNotesForm()),
-             _buildCategoryTile(context, 'Lab Coat', Icons.work, Colors.greenAccent, sellLCForm()),
-            _buildCategoryTile(context, 'Drafter', Icons.edit, Colors.greenAccent, sellDrafterForm()),
+            _buildCategoryTile(context, 'Books', Icons.book_online,
+                Colors.greenAccent, SellBookForm()),
+            _buildCategoryTile(context, 'Notes', Icons.note, Colors.greenAccent,
+                sellNotesForm()),
+            _buildCategoryTile(context, 'Lab Coat', Icons.work,
+                Colors.greenAccent, sellLCForm()),
+            _buildCategoryTile(context, 'Drafter', Icons.edit,
+                Colors.greenAccent, sellDrafterForm()),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildCategoryTile(BuildContext context, String title, IconData icon, Color tileColor, Widget destinationScreen) {
+  Widget _buildCategoryTile(BuildContext context, String title, IconData icon,
+      Color tileColor, Widget destinationScreen) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -62,10 +67,3 @@ class SellingScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-

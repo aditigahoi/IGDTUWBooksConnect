@@ -84,12 +84,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             CustomInkWell(
                               labelText: 'Computer Science',
-                              destinationScreen: BookListScreen(),
+                              destinationScreen: BookListScreen(branch: 'CSE'),
                             ),
                             SizedBox(width: 10),
                             CustomInkWell(
                               labelText: 'Information Technology',
-                              destinationScreen: BookListScreen(),
+                              destinationScreen: BookListScreen(branch: 'IT'),
                             )
                           ],
                         ),
@@ -100,12 +100,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             CustomInkWell(
                               labelText: 'Electronics Communication',
-                              destinationScreen: BookListScreen(),
+                              destinationScreen: BookListScreen(branch: 'ECE'),
                             ),
                             SizedBox(width: 10),
                             CustomInkWell(
-                              labelText: 'Information Technology',
-                              destinationScreen: BookListScreen(),
+                              labelText: 'Mechanics and Automation',
+                              destinationScreen: BookListScreen(branch: 'MAE'),
                             )
                           ],
                         )

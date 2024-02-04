@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: FirebaseOptions(
+    options: const FirebaseOptions(
       apiKey: "AIzaSyArS8nQXxUp14qVZE9HPtTp2oUkzNZIvRc",
       //authDomain: "your_auth_domain",
       projectId: "booksconnect-834a5",
