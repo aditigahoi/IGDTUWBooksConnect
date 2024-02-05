@@ -1,6 +1,8 @@
 import 'package:books_connect/Screens/HomeScreen.dart';
 // ignore: unused_import
 import 'package:books_connect/Screens/Page/signup.dart';
+import 'package:books_connect/Screens/signupscreen.dart';
+//import 'package:books_connect/Screens/applayout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -17,17 +19,18 @@ class _SignupScreenState extends State<SigninScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //final size = AppLayout.getSize(context);
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 247, 246, 246),
-        body: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Color.fromRGBO(250, 237, 237, 0.936),
-              Color.fromRGBO(251, 251, 251, 0.703)
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(colors: [
+            Color.fromRGBO(250, 237, 237, 0.936),
+            Color.fromRGBO(251, 251, 251, 0.703)
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+          child: SingleChildScrollView(
             child: Stack(
               children: [
                 Padding(
@@ -205,8 +208,7 @@ class _SignupScreenState extends State<SigninScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SignUpScreen()));
+                                      builder: (context) => SignupScreen()));
                             },
                             child: const Text(
                               " Sign Up",

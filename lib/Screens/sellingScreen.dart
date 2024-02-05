@@ -8,10 +8,10 @@ class SellingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.orange.shade200,
       appBar: AppBar(
         title: Text('What do you want to sell?'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.red.shade400,
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
@@ -19,13 +19,13 @@ class SellingScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildCategoryTile(context, 'Books', Icons.book_online,
-                Colors.greenAccent, SellBookForm()),
-            _buildCategoryTile(context, 'Notes', Icons.note, Colors.greenAccent,
-                sellNotesForm()),
+                Colors.red.shade300, SellBookForm()),
+            _buildCategoryTile(context, 'Notes', Icons.note,
+                Colors.red.shade300, sellNotesForm()),
             _buildCategoryTile(context, 'Lab Coat', Icons.work,
-                Colors.greenAccent, sellLCForm()),
+                Colors.red.shade300, sellLCForm()),
             _buildCategoryTile(context, 'Drafter', Icons.edit,
-                Colors.greenAccent, sellDrafterForm()),
+                Colors.red.shade300, sellDrafterForm()),
           ],
         ),
       ),
