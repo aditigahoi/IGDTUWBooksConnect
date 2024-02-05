@@ -14,7 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.orange.shade100,
       // appBar: AppBar(
       //   title: Text('IGDTUW BooksConnect'),
       //   toolbarHeight: 70.0,
@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           centerTitle: true,
-          backgroundColor: Color(0xFF8C1C13),
+          backgroundColor: Colors.red.shade400,
           //backgroundColor: Colors.teal,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                color: const Color(0xFFBF4342),
+                color: Colors.red.shade300,
                 elevation: 5,
                 shadowColor: Colors.black,
                 child: Container(
@@ -118,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                color: const Color(0xFFBF4342),
+                color: Colors.red.shade300,
                 elevation: 5,
                 shadowColor: Colors.black,
                 child: Container(
@@ -174,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                color: const Color(0xFFBF4342),
+                color: Colors.red.shade300,
                 child: Container(
                   width: double.infinity, // Set a width for the card
                   height: 150, // Set a height for the card
@@ -193,7 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                color: Color(0xFFBF4342),
+                color: Colors.red.shade300,
                 child: Container(
                     width: double.infinity, // Set a width for the card
                     height: 150,
@@ -234,7 +234,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: Color(0xFF21222D),
+              color: Colors.red,
               size: 30,
             ),
             label: 'Home',
@@ -242,7 +242,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.favorite_border_outlined,
-              color: Color(0xFF21222D),
+              color: Colors.red,
               size: 30,
             ),
             label: 'Favorites',
@@ -250,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.chat,
-              color: Color(0xFF21222D),
+              color: Colors.red,
               size: 30,
             ),
             label: 'Chat',

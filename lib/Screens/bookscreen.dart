@@ -41,7 +41,9 @@ class _BookListScreenState extends State<BookListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.orange.shade100,
       appBar: AppBar(
+        backgroundColor: Colors.red.shade400,
         title: Text('Book List'),
       ),
       body: StreamBuilder(
@@ -67,6 +69,7 @@ class _BookListScreenState extends State<BookListScreen> {
             itemBuilder: (context, index) {
               final book = books[index];
               return Card(
+                color: Colors.red.shade300,
                 margin: EdgeInsets.all(8),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -78,6 +81,8 @@ class _BookListScreenState extends State<BookListScreen> {
                         height: 150,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
+                          color:
+                              Colors.lightBlue, // here we need to put for pic
                         ),
                       ),
                       SizedBox(width: 16),
@@ -87,47 +92,38 @@ class _BookListScreenState extends State<BookListScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Price: \$${book.price.toStringAsFixed(2)}',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Description:',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
                               'Branch: ${book.branch}',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
-                              'Condition: ${book.condition}',
+                              'Description: ${book.condition}',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               'Subject: ${book.subject}',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               'Year: ${book.year}',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'Price: \$${book.price.toStringAsFixed(2)}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -135,16 +131,17 @@ class _BookListScreenState extends State<BookListScreen> {
                       ),
                       // Right side - Chat Button
                       ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ChatScreen(book: book),
-                            ),
-                          );
-                        },
-                        child: Text('Chat with seller'),
-                      ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChatScreen(book: book),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Chat with seller',
+                          )),
                     ],
                   ),
                 ),
@@ -156,9 +153,6 @@ class _BookListScreenState extends State<BookListScreen> {
     );
   }
 }
-
-
-
 
 // class BookListScreen extends StatelessWidget {
 //   final List<Book> booklist = [
