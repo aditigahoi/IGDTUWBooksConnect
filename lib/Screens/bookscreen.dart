@@ -27,7 +27,9 @@ class BookListScreen extends StatefulWidget {
 }
 
 class _BookListScreenState extends State<BookListScreen> {
+  Map<String, dynamic>? userMap;
   late Stream<QuerySnapshot> _stream;
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -38,19 +40,28 @@ class _BookListScreenState extends State<BookListScreen> {
         .snapshots();
   }
 
+  String chatRoomId(String user1, String user2) {
+    if (user1[0].toLowerCase().codeUnits[0] >
+        user2.toLowerCase().codeUnits[0]) {
+      return "$user1$user2";
+    } else {
+      return "$user2$user1";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange.shade100,
       appBar: AppBar(
         backgroundColor: Colors.red.shade400,
-        title: Text('Book List'),
+        title: const Text('Book List'),
       ),
       body: StreamBuilder(
         stream: _stream,
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           final books = snapshot.data!.docs.map((doc) {
@@ -70,7 +81,7 @@ class _BookListScreenState extends State<BookListScreen> {
               final book = books[index];
               return Card(
                 color: Colors.red.shade300,
-                margin: EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
@@ -85,7 +96,7 @@ class _BookListScreenState extends State<BookListScreen> {
                               Colors.lightBlue, // here we need to put for pic
                         ),
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       // Right side - Book Details and Chat Button
                       Expanded(
                         child: Column(
@@ -93,35 +104,35 @@ class _BookListScreenState extends State<BookListScreen> {
                           children: [
                             Text(
                               'Branch: ${book.branch}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               'Description: ${book.condition}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               'Subject: ${book.subject}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               'Year: ${book.year}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               'Price: \$${book.price.toStringAsFixed(2)}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -131,17 +142,25 @@ class _BookListScreenState extends State<BookListScreen> {
                       ),
                       // Right side - Chat Button
                       ElevatedButton(
-                          onPressed: () {
+                        onPressed: () async {
+                          Map<String, String>? sellerInfo =
+                              await getSellerInfo(book);
+                          if (sellerInfo != null) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ChatScreen(book: book),
+                                builder: (context) => ChatPage(
+                                  recieverUid: sellerInfo['userId']!,
+                                  recieverEmail: sellerInfo['email']!,
+                                ),
                               ),
                             );
-                          },
-                          child: Text(
-                            'Chat with seller',
-                          )),
+                          } else {
+                            print('Seller information is null');
+                          }
+                        },
+                        child: const Text('Chat with seller'),
+                      ),
                     ],
                   ),
                 ),
@@ -152,6 +171,26 @@ class _BookListScreenState extends State<BookListScreen> {
       ),
     );
   }
+}
+
+Future<Map<String, String>?> getSellerInfo(Book book) async {
+  Map<String, String>? sellerInfo;
+  QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+      .collection('users')
+      .where('branch', isEqualTo: book.branch)
+      .where('condition', isEqualTo: book.condition)
+      .where('price', isEqualTo: book.price)
+      .where('subject', isEqualTo: book.subject)
+      .where('year', isEqualTo: book.year)
+      .get();
+
+  if (querySnapshot.docs.isNotEmpty) {
+    var data = querySnapshot.docs.first.data() as Map<String, dynamic>;
+    var userId = data['userId'];
+    var email = data['email'];
+    sellerInfo = {'userId': userId, 'email': email};
+  }
+  return sellerInfo;
 }
 
 // class BookListScreen extends StatelessWidget {

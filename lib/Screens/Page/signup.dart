@@ -1,4 +1,5 @@
 import 'package:books_connect/Screens/HomeScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:books_connect/reusable_widget/reusableWidget.dart';
 //import 'package:firebase_signin/utils/color_utils.dart';
@@ -65,14 +66,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           password: _passwordTextController.text)
                       .then((value) {
                     print("Created New Account");
-                    Navigator.push(
+
+                    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+                    // Create a new document in the 'users' collection with the user's UID as the document ID
+                    _firestore
+                        .collection('chatusers')
+                        .doc(value.user!.uid)
+                        .set({
+                      'email': _emailTextController.text,
+                      // Add other user details here as needed
+                    }).then((_) {
+                      print('User details saved to Firestore');
+                      // Navigate to the next screen
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MyHomePage(
-                                  email: _emailTextController.text,
-                                )));
-                  }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
+                          builder: (context) => MyHomePage(
+                            email: _emailTextController.text,
+                          ),
+                        ),
+                      );
+                    }).catchError((error) {
+                      print("Error saving user details: $error");
+                    });
+                  }).catchError((error) {
+                    print("Error creating user account: $error");
                   });
                 })
               ],

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // Define _selectedBranch variable
@@ -12,6 +13,8 @@ class SellBookForm extends StatefulWidget {
 class _SellBookFormState extends State<SellBookForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  late User _currentUser; // Store the current user
+
   // Define variables to store form data
   String _subject = '';
   String _condition = '';
@@ -20,6 +23,14 @@ class _SellBookFormState extends State<SellBookForm> {
 
   // Define _branches variable
   String _selectedBranch = _branches.isNotEmpty ? _branches[0] : '';
+
+  @override
+  void initState() {
+    super.initState();
+    // Retrieve the current user after the widget has been initialized
+    _currentUser = FirebaseAuth.instance.currentUser!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,6 +201,8 @@ class _SellBookFormState extends State<SellBookForm> {
 
       try {
         await users.add({
+          'userId': _currentUser.uid,
+          'email': _currentUser.email, // Save the email ID
           'branch': _selectedBranch,
           'subject': _subject,
           'price': _price,
