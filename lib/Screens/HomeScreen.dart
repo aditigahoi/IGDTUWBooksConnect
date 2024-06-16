@@ -1,3 +1,4 @@
+import 'package:books_connect/Screens/allChatScreen.dart';
 import 'package:books_connect/Screens/bookscreen.dart';
 import 'package:books_connect/Screens/sellingScreen.dart';
 import 'package:flutter/material.dart';
@@ -229,34 +230,100 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Colors.red,
-              size: 30,
-            ),
-            label: 'Home',
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 5.0,
+        clipBehavior: Clip.antiAlias,
+        child: SizedBox(
+          height: kBottomNavigationBarHeight +
+              15.0, // Adjust height to accommodate text
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.home),
+                    onPressed: () {},
+                  ),
+                  Text(
+                    'Home',
+                    style: TextStyle(fontSize: 10.0),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.note_alt_outlined),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AllChatScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  Text(
+                    'Chat',
+                    style: TextStyle(fontSize: 10.0),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.note),
+                    onPressed: () {},
+                  ),
+                  Text(
+                    'Details',
+                    style: TextStyle(fontSize: 10.0),
+                  ),
+                ],
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite_border_outlined,
-              color: Colors.red,
-              size: 30,
-            ),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.chat,
-              color: Colors.red,
-              size: 30,
-            ),
-            label: 'Chat',
-          ),
-        ],
+        ),
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.home,
+      //         color: Colors.red,
+      //         size: 30,
+      //       ),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+
+      //       icon: Icon(
+      //         Icons.favorite_border_outlined,
+      //         color: Colors.red,
+      //         size: 30,
+      //       ),
+      //       label: 'Favorites',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.chat,
+      //         color: Colors.red,
+
+      //         size: 30,
+      //       ),
+      //       label: 'Chat',
+      //     ),
+      //   ],
+      // ),
     );
   }
 }
