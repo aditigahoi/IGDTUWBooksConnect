@@ -16,7 +16,9 @@ class _AllChatScreenState extends State<AllChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.orange.shade100,
       appBar: AppBar(
+        backgroundColor: Colors.red.shade400,
         title: Text('All Chats'),
       ),
       body: StreamBuilder(

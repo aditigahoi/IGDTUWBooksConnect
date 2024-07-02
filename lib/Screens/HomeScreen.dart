@@ -16,11 +16,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange.shade100,
-      // appBar: AppBar(
-      //   title: Text('IGDTUW BooksConnect'),
-      //   toolbarHeight: 70.0,
-      //   backgroundColor: Colors.teal,
-      // ),
       appBar: PreferredSize(
         preferredSize:
             const Size.fromHeight(100.0), // Adjust the height as needed
@@ -264,100 +259,55 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 5.0,
-        clipBehavior: Clip.antiAlias,
-        child: SizedBox(
-          height: kBottomNavigationBarHeight +
-              15.0, // Adjust height to accommodate text
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.home),
-                    onPressed: () {},
-                  ),
-                  Text(
-                    'Home',
-                    style: TextStyle(fontSize: 10.0),
-                  ),
-                ],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.red.shade400,
+        items: [
+          BottomNavigationBarItem(
+            icon: InkWell(
+              onTap: () {
+                //for home
+              },
+              child: const Icon(
+                Icons.home,
+                color: Colors.white,
+                size: 30,
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.note_alt_outlined),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AllChatScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  Text(
-                    'Chat',
-                    style: TextStyle(fontSize: 10.0),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.note),
-                    onPressed: () {},
-                  ),
-                  Text(
-                    'Details',
-                    style: TextStyle(fontSize: 10.0),
-                  ),
-                ],
-              ),
-            ],
+            ),
+            label: 'Home',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AllChatScreen(),
+                  ),
+                );
+              },
+              child: const Icon(
+                Icons.chat,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+            label: 'Chat',
+          ),
+          BottomNavigationBarItem(
+            icon: InkWell(
+              onTap: () {
+                //for details
+              },
+              child: const Icon(
+                Icons.note,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+            label: 'Details',
+          ),
+        ],
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const [
-      //     BottomNavigationBarItem(
-      //       icon: Icon(
-      //         Icons.home,
-      //         color: Colors.red,
-      //         size: 30,
-      //       ),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-
-      //       icon: Icon(
-      //         Icons.favorite_border_outlined,
-      //         color: Colors.red,
-      //         size: 30,
-      //       ),
-      //       label: 'Favorites',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(
-      //         Icons.chat,
-      //         color: Colors.red,
-
-      //         size: 30,
-      //       ),
-      //       label: 'Chat',
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

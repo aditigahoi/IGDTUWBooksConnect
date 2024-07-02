@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 // Define _selectedBranch variable
 const List<String> _branches = ['Branch', 'CSE', 'ECE', 'IT', 'MAE'];
@@ -82,25 +84,27 @@ class _SellBookFormState extends State<SellBookForm> {
               const SizedBox(
                 height: 16,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.notes),
-                  labelText: 'Subject',
-                  filled: true,
-                  fillColor: Colors.red.shade300,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Flexible(
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.notes),
+                    labelText: 'Subject',
+                    filled: true,
+                    fillColor: Colors.red.shade300,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter subject';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _subject = value!;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter subject';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _subject = value!;
-                },
               ),
               const SizedBox(
                 height: 16,
@@ -129,25 +133,27 @@ class _SellBookFormState extends State<SellBookForm> {
               const SizedBox(
                 height: 16,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.format_list_numbered),
-                  labelText: 'Description',
-                  filled: true,
-                  fillColor: Colors.red.shade300,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Flexible(
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.format_list_numbered),
+                    labelText: 'Description',
+                    filled: true,
+                    fillColor: Colors.red.shade300,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the description';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _condition = value!;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the description';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _condition = value!;
-                },
               ),
               const SizedBox(
                 height: 16,
