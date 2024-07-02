@@ -21,7 +21,7 @@ class _sellLCFormState extends State<sellLCForm> {
       home: Center(
         child: Scaffold(
           appBar: AppBar(
-           backgroundColor:  Colors.teal,
+            backgroundColor: Colors.teal,
             title: const Text('Sell Your Lab Coat'),
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
@@ -106,14 +106,13 @@ class _sellLCFormState extends State<sellLCForm> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.teal, // Background color
-                      onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-
+                      foregroundColor: Colors.teal, // Background color
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      padding: EdgeInsets.all(16.0),
                     ),
-                    padding: EdgeInsets.all(16.0),
-                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();

@@ -1,25 +1,20 @@
 import 'package:books_connect/Screens/HomeScreen.dart';
-// ignore: unused_import
-import 'package:books_connect/Screens/Page/signup.dart';
-import 'package:books_connect/Screens/signupscreen.dart';
-//import 'package:books_connect/Screens/applayout.dart';
+import 'package:books_connect/Screens/Authentication/signinscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 
-class SigninScreen extends StatefulWidget {
+class SignupScreen extends StatefulWidget {
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SigninScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _userNameTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    //final size = AppLayout.getSize(context);
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 247, 246, 246),
         body: Container(
@@ -41,12 +36,9 @@ class _SignupScreenState extends State<SigninScreen> {
                       SizedBox(height: 10.0),
                       // Centered Logo
                       Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                            'image/booklogo.png', // Replace with the path to your image asset
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: MediaQuery.of(context).size.height * 0.3,
-                          )),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset('assets/image/booklogo.png'),
+                      ),
 
                       SizedBox(height: 20.0), // Adjust the spacing as needed
 
@@ -102,91 +94,129 @@ class _SignupScreenState extends State<SigninScreen> {
 
                       SizedBox(height: 10.0), // Adjust the spacing as needed
 
-                      // "Enter phone number" input with received call icon
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          decoration: BoxDecoration(
-                            border:
-                                Border(bottom: BorderSide(color: Colors.grey)),
-                            color: Colors.transparent,
+                      Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(color: Colors.grey)),
+                              color: Colors.transparent,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter valid username';
+                                      }
+                                      return null;
+                                    },
+                                    enableSuggestions: true,
+                                    autocorrect: true,
+                                    controller: _userNameTextController,
+                                    keyboardType: TextInputType.name,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Enter Username',
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Icon(
+                                    Icons.person_outline,
+                                    color: Colors.orange,
+                                    // Replace with your received call icon
+                                    size: 24.0,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      obscureText: false,
-                                      enableSuggestions: true,
-                                      autocorrect: true,
-                                      controller: _emailTextController,
-                                      keyboardType: TextInputType.emailAddress,
-                                      decoration: const InputDecoration(
-                                        hintText: 'Enter Email Address',
-                                        border: InputBorder.none,
-                                      ),
+                          SizedBox(height: 10.0),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(color: Colors.grey)),
+                              color: Colors.transparent,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    obscureText: false,
+                                    enableSuggestions: true,
+                                    autocorrect: true,
+                                    controller: _emailTextController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Enter Email Address',
+                                      border: InputBorder.none,
                                     ),
                                   ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(12.0),
-                                    child: Icon(
-                                      Icons.mail_outline,
-                                      color: Colors.orange,
-                                      // Replace with your received call icon
-                                      size: 24.0,
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Icon(
+                                    Icons.mail_outline,
+                                    color: Colors.orange,
+                                    // Replace with your received call icon
+                                    size: 24.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10.0),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(color: Colors.grey)),
+                              color: Colors.transparent,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    obscureText: true,
+                                    enableSuggestions: false,
+                                    autocorrect: false,
+                                    controller: _passwordTextController,
+                                    keyboardType: TextInputType.visiblePassword,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Enter Password',
+                                      border: InputBorder.none,
                                     ),
                                   ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      obscureText: true,
-                                      enableSuggestions: false,
-                                      autocorrect: false,
-                                      controller: _passwordTextController,
-                                      keyboardType:
-                                          TextInputType.visiblePassword,
-                                      decoration: const InputDecoration(
-                                        hintText: 'Enter Password',
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Icon(
+                                    Icons.lock_outline,
+                                    color: Colors.orange,
+                                    // Replace with your received call icon
+                                    size: 24.0,
                                   ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(12.0),
-                                    child: Icon(
-                                      Icons.lock_outline,
-                                      color: Colors.orange,
-                                      // Replace with your received call icon
-                                      size: 24.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
 
                       SizedBox(height: 20.0),
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     // dashboard
-                      //     // Navigator.push(
-                      //     //   context,
-                      //     //   MaterialPageRoute(
-                      //     //     builder: (context) => MyHomePage(),
-                      //     //   ),
-                      //     // );
-                      //   },
-                      //   child: Text('Continue'),
-                      // ),
-                      firebaseUIButton(context, "Sign In", () {
+
+                      firebaseUIButton(context, "Sign Up", () {
                         FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
+                            .createUserWithEmailAndPassword(
                                 email: _emailTextController.text,
                                 password: _passwordTextController.text)
                             .then((value) {
+                          print("Created New Account");
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -200,7 +230,7 @@ class _SignupScreenState extends State<SigninScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don't have account?",
+                          const Text("Already have an account?",
                               style: TextStyle(
                                   color: Color.fromARGB(179, 144, 4, 4))),
                           GestureDetector(
@@ -208,10 +238,10 @@ class _SignupScreenState extends State<SigninScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => SignupScreen()));
+                                      builder: (context) => SigninScreen()));
                             },
                             child: const Text(
-                              " Sign Up",
+                              " Sign In",
                               style: TextStyle(
                                   color: Color.fromARGB(255, 80, 11, 11),
                                   fontWeight: FontWeight.bold),
@@ -254,32 +284,4 @@ class _SignupScreenState extends State<SigninScreen> {
           ),
         ));
   }
-}
-
-Container firebaseUIButton(BuildContext context, String title, Function onTap) {
-  return Container(
-    // width: MediaQuery.of(context).size.width,
-    height: 50,
-    margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-    decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
-    child: ElevatedButton(
-      onPressed: () {
-        onTap();
-      },
-      child: Text(
-        title,
-        style: const TextStyle(
-            color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
-      ),
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.pressed)) {
-              return Colors.black26;
-            }
-            return Colors.white;
-          }),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
-    ),
-  );
 }

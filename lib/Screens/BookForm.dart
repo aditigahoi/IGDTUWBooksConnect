@@ -178,8 +178,8 @@ class _SellBookFormState extends State<SellBookForm> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red.shade400, // Background color
-                  onPrimary: Color.fromARGB(255, 255, 255, 255),
+                  foregroundColor: Colors.red.shade400, // Background color
+                  backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),

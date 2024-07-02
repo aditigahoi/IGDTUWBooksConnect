@@ -23,7 +23,7 @@ class _sellNotesFormState extends State<sellNotesForm> {
       home: Center(
         child: Scaffold(
           appBar: AppBar(
-           backgroundColor:  Colors.teal,
+            backgroundColor: Colors.teal,
             title: const Text('Sell Your Notes'),
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
@@ -155,20 +155,20 @@ class _sellNotesFormState extends State<sellNotesForm> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.teal, // Background color
-                      onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-
+                      foregroundColor: Colors.teal, // Background color
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      padding: EdgeInsets.all(16.0),
                     ),
-                    padding: EdgeInsets.all(16.0),
-                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
                         // Process the form data (e.g., submit to a backend server)
                         // You can add your logic here
-                        print('Title: $_branch $_year $_condition $_subject $_price');
+                        print(
+                            'Title: $_branch $_year $_condition $_subject $_price');
                         // Add further logic for submitting the form data
                       }
                     },

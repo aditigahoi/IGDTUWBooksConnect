@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class sellDrafterForm extends StatefulWidget {
   @override
   _sellDrafterFormState createState() => _sellDrafterFormState();
@@ -22,7 +21,7 @@ class _sellDrafterFormState extends State<sellDrafterForm> {
       home: Center(
         child: Scaffold(
           appBar: AppBar(
-           backgroundColor:  Colors.teal,
+            backgroundColor: Colors.teal,
             title: const Text('Sell Your Drafter'),
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
@@ -107,20 +106,21 @@ class _sellDrafterFormState extends State<sellDrafterForm> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.teal, // Background color
-                      onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                      foregroundColor: Colors.teal, // Background color
+                      backgroundColor: Colors.white,
 
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      padding: EdgeInsets.all(16.0),
                     ),
-                    padding: EdgeInsets.all(16.0),
-                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
                         // Process the form data (e.g., submit to a backend server)
                         // You can add your logic here
-                        print('Title: $_name, Condition: $_condition, Price: $_price');
+                        print(
+                            'Title: $_name, Condition: $_condition, Price: $_price');
                         // Add further logic for submitting the form data
                       }
                     },
@@ -135,4 +135,3 @@ class _sellDrafterFormState extends State<sellDrafterForm> {
     );
   }
 }
- 

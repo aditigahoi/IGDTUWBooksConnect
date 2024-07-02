@@ -1,13 +1,15 @@
+import 'dart:math';
+
 import 'package:books_connect/Screens/chatscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Book {
-  final double price;
+  final num price;
   final String branch;
   final String condition;
   final String subject;
-  final int year;
+  final num year;
 
   Book({
     required this.price,
@@ -19,7 +21,7 @@ class Book {
 }
 
 class BookListScreen extends StatefulWidget {
-  const BookListScreen({required this.branch});
+  const BookListScreen({super.key, required this.branch});
   final String branch;
 
   @override
@@ -27,7 +29,26 @@ class BookListScreen extends StatefulWidget {
 }
 
 class _BookListScreenState extends State<BookListScreen> {
-  Map<String, dynamic>? userMap;
+  //list of the colors
+  List<Color> backcolor = [
+    Colors.red,
+    Colors.blue,
+    Colors.green,
+    Colors.yellow,
+    Colors.orange,
+    Colors.purple,
+    Colors.pink,
+    Colors.brown,
+    Colors.cyan,
+  ];
+
+  // Assign a random color to each item
+  Color getRandomColor() {
+    final random = Random();
+    return backcolor[random.nextInt(backcolor.length)];
+  }
+
+  //Map<String, dynamic>? userMap;
   late Stream<QuerySnapshot> _stream;
   // final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -75,98 +96,108 @@ class _BookListScreenState extends State<BookListScreen> {
             );
           }).toList();
 
-          return ListView.builder(
-            itemCount: books.length,
-            itemBuilder: (context, index) {
-              final book = books[index];
-              return Card(
-                color: Colors.red.shade300,
-                margin: const EdgeInsets.all(8),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      // Left side - Book Image
-                      Container(
-                        width: 150,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color:
-                              Colors.lightBlue, // here we need to put for pic
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      // Right side - Book Details and Chat Button
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+          return books.isEmpty
+              ? Center(child: Text('BookList is not added'))
+              : ListView.builder(
+                  itemCount: books.length,
+                  itemBuilder: (context, index) {
+                    final book = books[index];
+                    return Card(
+                      color: getRandomColor(),
+                      margin: const EdgeInsets.all(8),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
                           children: [
-                            Text(
-                              'Branch: ${book.branch}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                            // Left side - Book Image
+                            Container(
+                              width: 150,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'assets/image/booklogo.png')),
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors
+                                    .lightBlue, // here we need to put for pic
                               ),
                             ),
-                            Text(
-                              'Description: ${book.condition}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                            const SizedBox(width: 16),
+                            // Right side - Book Details and Chat Button
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Branch: ${book.branch}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Description: ${book.condition}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Subject: ${book.subject}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Year: ${book.year}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Price: \$${book.price.toStringAsFixed(2)}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      Map<String, String>? sellerInfo =
+                                          await getSellerInfo(book);
+                                      if (sellerInfo != null) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ChatPage(
+                                              recieverUid:
+                                                  sellerInfo['userId']!,
+                                              recieverEmail:
+                                                  sellerInfo['email']!,
+                                            ),
+                                          ),
+                                        );
+                                      } else {
+                                        print('Seller information is null');
+                                      }
+                                    },
+                                    child: const Text(
+                                      'Chat with seller',
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Text(
-                              'Subject: ${book.subject}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Year: ${book.year}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Price: \$${book.price.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            // Right side - Chat Button
                           ],
                         ),
                       ),
-                      // Right side - Chat Button
-                      ElevatedButton(
-                        onPressed: () async {
-                          Map<String, String>? sellerInfo =
-                              await getSellerInfo(book);
-                          if (sellerInfo != null) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ChatPage(
-                                  recieverUid: sellerInfo['userId']!,
-                                  recieverEmail: sellerInfo['email']!,
-                                ),
-                              ),
-                            );
-                          } else {
-                            print('Seller information is null');
-                          }
-                        },
-                        child: const Text('Chat with seller'),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
+                    );
+                  },
+                );
         },
       ),
     );

@@ -40,6 +40,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text(widget.recieverEmail),
       ),
       body: Column(
@@ -70,6 +71,7 @@ class _ChatPageState extends State<ChatPage> {
         }
 
         return ListView(
+          padding: const EdgeInsets.only(left: 10, right: 10),
           children: snapshot.data!.docs
               .map((document) => _buildMessageItem(document))
               .toList(),
@@ -79,17 +81,32 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _buildMessageInput() {
-    return Row(
-      children: [
-        Expanded(
-          child: TextField(
-            controller: _messageController,
-            obscureText: false,
+    return Container(
+      color: Colors.teal.shade100,
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                controller: _messageController,
+              ),
+            ),
           ),
-        ),
-        IconButton(
-            onPressed: sendMessage, icon: Icon(Icons.arrow_upward, size: 40))
-      ],
+          Container(
+            height: 65,
+            decoration: BoxDecoration(
+                color: Colors.teal, borderRadius: BorderRadius.circular(10)),
+            child: IconButton(
+                onPressed: sendMessage, icon: Icon(Icons.send, size: 40)),
+          )
+        ],
+      ),
     );
   }
 

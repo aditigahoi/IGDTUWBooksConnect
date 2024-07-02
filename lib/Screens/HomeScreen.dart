@@ -1,5 +1,5 @@
+import 'package:books_connect/Screens/FindBooks/bookscreen.dart';
 import 'package:books_connect/Screens/allChatScreen.dart';
-import 'package:books_connect/Screens/bookscreen.dart';
 import 'package:books_connect/Screens/sellingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:books_connect/Screens/BookForm.dart';
@@ -52,12 +52,17 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Caterogies',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+              Center(
+                child: Text(
+                  'Caterogies',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Card(
                 shape: RoundedRectangleBorder(
@@ -66,51 +71,64 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.red.shade300,
                 elevation: 5,
                 shadowColor: Colors.black,
-                child: Container(
-                  width: double.infinity, // Set a width for the card
-                  height: 150, // Set a height for the card
-                  child: Center(
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Find Books Here',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                child: Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(10)),
+                    width: double.infinity, // Set a width for the card
+                    height: 180, // Set a height for the card
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const Text(
+                            'Find Books Here',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomInkWell(
-                              labelText: 'Computer Science',
-                              destinationScreen: BookListScreen(branch: 'CSE'),
-                            ),
-                            SizedBox(width: 10),
-                            CustomInkWell(
-                              labelText: 'Information Technology',
-                              destinationScreen: BookListScreen(branch: 'IT'),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomInkWell(
-                              labelText: 'Electronics Communication',
-                              destinationScreen: BookListScreen(branch: 'ECE'),
-                            ),
-                            SizedBox(width: 10),
-                            CustomInkWell(
-                              labelText: 'Mechanics and Automation',
-                              destinationScreen: BookListScreen(branch: 'MAE'),
-                            )
-                          ],
-                        )
-                      ],
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomInkWell(
+                                col: Colors.pink,
+                                labelText: 'Computer Science',
+                                destinationScreen:
+                                    BookListScreen(branch: 'CSE'),
+                              ),
+                              SizedBox(width: 10),
+                              CustomInkWell(
+                                col: Colors.green,
+                                labelText: 'Information Technology',
+                                destinationScreen: BookListScreen(branch: 'IT'),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomInkWell(
+                                col: Colors.teal,
+                                labelText: 'Electronics Communication',
+                                destinationScreen:
+                                    BookListScreen(branch: 'ECE'),
+                              ),
+                              SizedBox(width: 10),
+                              CustomInkWell(
+                                col: Colors.lime,
+                                labelText: 'Mechanics and Automation',
+                                destinationScreen:
+                                    BookListScreen(branch: 'MAE'),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -123,14 +141,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 elevation: 5,
                 shadowColor: Colors.black,
                 child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.pink,
+                      borderRadius: BorderRadius.circular(10)),
                   width: double.infinity, // Set a width for the card
-                  height: 150, // Set a height for the card
+                  height: 200, // Set a height for the card
                   child: Center(
                     child: Column(
                       children: [
                         const Text(
                           'Find Notes Here',
                           style: TextStyle(
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
@@ -142,11 +164,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             CustomInkWell(
                               labelText: 'Computer Science',
                               destinationScreen: SellBookForm(),
+                              col: Colors.amber,
                             ),
                             SizedBox(width: 10),
                             CustomInkWell(
                               labelText: 'Information Technology',
                               destinationScreen: SellBookForm(),
+                              col: Colors.cyan,
                             )
                           ],
                         ),
@@ -156,11 +180,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CustomInkWell(
+                              col: Colors.teal,
                               labelText: 'Electronics Communication',
                               destinationScreen: SellBookForm(),
                             ),
                             SizedBox(width: 10),
                             CustomInkWell(
+                              col: Colors.purple,
                               labelText: 'Information Technology',
                               destinationScreen: SellBookForm(),
                             )
@@ -177,12 +203,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 color: Colors.red.shade300,
                 child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(10)),
                   width: double.infinity, // Set a width for the card
                   height: 150, // Set a height for the card
                   child: Center(
                     child: Text(
                       'Find Lab Coats Here',
                       style: TextStyle(
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
@@ -196,6 +226,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 color: Colors.red.shade300,
                 child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.purple,
+                        borderRadius: BorderRadius.circular(10)),
                     width: double.infinity, // Set a width for the card
                     height: 150,
                     child: const InkWell(
@@ -203,6 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           'Drafter & Engineering Drawing Material ',
                           style: TextStyle(
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
@@ -331,8 +365,12 @@ class _MyHomePageState extends State<MyHomePage> {
 class CustomInkWell extends StatelessWidget {
   final String labelText;
   final Widget destinationScreen;
+  final Color col;
 
-  CustomInkWell({required this.labelText, required this.destinationScreen});
+  CustomInkWell(
+      {required this.labelText,
+      required this.destinationScreen,
+      required this.col});
 
   @override
   Widget build(BuildContext context) {
@@ -345,16 +383,20 @@ class CustomInkWell extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: Center(
           child: Container(
-            height: 50,
-            width: 200,
+            height: 60,
+            width: 160,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
+              color: col,
+              border: Border.all(
+                color: Colors.white,
+              ),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
               labelText,
               style: TextStyle(
+                color: Colors.white,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
